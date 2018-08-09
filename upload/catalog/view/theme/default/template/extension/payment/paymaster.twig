@@ -1,0 +1,23 @@
+<form action="{{ action }}" method="post">
+    <input type="hidden" value="{{ merchant_id }}" name="LMI_MERCHANT_ID">
+    <input type="hidden" value="{{ amount }}" name="LMI_PAYMENT_AMOUNT">
+    <input type="hidden" value="{{ lmi_currency }}" name="LMI_CURRENCY">
+    <input type="hidden" value="{{ order_id }}" name="LMI_PAYMENT_NO">
+    <input type="hidden" value="{{ description }}" name="LMI_PAYMENT_DESC">
+    <input type="hidden" value="{{ email }}" name="LMI_PAYER_EMAIL">
+    <input type="hidden" value="{{ sign }}" name="SIGN">
+    <input type="hidden" value="{{ payment_notification_url }}" name="LMI_PAYMENT_NOTIFICATION_URL">
+    <input type="hidden" value="{{ success_url }}" name="LMI_SUCCESS_URL">
+    <input type="hidden" value="{{ fail_url }}" name="LMI_FAILURE_URL">
+    {% set pos = 0%}
+    {% for check in order_check %}
+        <input type="hidden" value="{{ check['name'] }}" name="LMI_SHOPPINGCART.ITEMS[{{ pos }}].NAME">
+        <input type="hidden" value="{{ check['quantity'] }}" name="LMI_SHOPPINGCART.ITEMS[{{ pos }}].QTY">
+        <input type="hidden" value="{{ check['price'] }}" name="LMI_SHOPPINGCART.ITEMS[{{ pos }}].PRICE">
+        <input type="hidden" value="{{ check['tax'] }}" name="LMI_SHOPPINGCART.ITEMS[{{ pos }}].TAX">
+        {% set pos = pos + 1  %}
+    {% endfor %}
+    <div class="buttons">
+        <div class="pull-right"><input type="submit" value="{{ button_confirm }}" class="btn btn-primary" /></div>
+    </div>
+</form>
