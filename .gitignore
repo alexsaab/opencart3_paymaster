@@ -24,3 +24,4 @@ upload/
 !/upload/catalog/view/theme/default/template/extension/payment/paymaster.twig
 !/readme.md
 !/Instruction.docx
+!/upload/admin/view/image/payment/paymaster.png
