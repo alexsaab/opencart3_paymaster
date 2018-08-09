@@ -22,3 +22,5 @@ upload/
 !/upload/admin/language/ru/extension/payment/paymaster.php
 !/upload/admin/language/ru-ru/extension/payment/paymster.php
 !/upload/catalog/view/theme/default/template/extension/payment/paymaster.twig
+!/readme.md
+!/Instruction.docx
