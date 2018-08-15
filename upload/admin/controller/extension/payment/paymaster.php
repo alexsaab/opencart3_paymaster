@@ -203,6 +203,8 @@ class ControllerExtensionPaymentPaymaster extends Controller
             $data['payment_paymaster_geo_zone_id'] = $this->config->get('payment_paymaster_geo_zone_id');
         }
 
+
+
         if (isset($this->request->post['payment_paymaster_log'])) {
             $data['payment_paymaster_log'] = $this->request->post['payment_paymaster_log'];
         } else {

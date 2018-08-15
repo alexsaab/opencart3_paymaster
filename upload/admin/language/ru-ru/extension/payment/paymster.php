@@ -12,6 +12,7 @@ $_['text_url_res']   = 'URL страницы результата оплаты:'
 $_['text_url_fail']  = 'URL страницы неуспешной оплаты:';
 
 
+
 // Entry
 $_['entry_merchant_id']  = 'Merchant ID:';
 $_['entry_secret_key']   = 'Секретный ключ:';
