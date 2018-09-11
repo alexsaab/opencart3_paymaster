@@ -61,7 +61,7 @@ class ControllerExtensionPaymentPaymaster extends Controller
         $this->load->model('checkout/order');
 
         $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-        $data['merchant_id'] = $this->config->get('paymaster_merchant_id');
+        $data['merchant_id'] = $this->config->get('payment_paymaster_merchant_id');
         $data['email'] = $order_info['email'];
         $data['order_id'] = $this->session->data['order_id'];
         $data['amount'] = number_format($order_info['total'], 2, ".", "");
