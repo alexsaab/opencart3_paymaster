@@ -30,15 +30,14 @@ class ControllerExtensionPaymentPaymaster extends Controller
 
         if ($order_products) {
             foreach ($order_products as $order_product) {
+                $tax = $this->getTax($order_product['product_id']);
                 $data['order_check'][] = array(
                     'name' => $order_product['name'],
                     'price' => $order_product['price'],
                     'quantity' => $order_product['quantity'],
-                    'tax' => $this->config->get('tax_status') ? $this->getTax($order_product['product_id']) : self::STATUS_TAX_OFF,
+                    'tax' => ($tax) ? $tax : self::STATUS_TAX_OFF,
                 );
-
                 $product_amount += $order_product['price'] * $order_product['quantity'];
-
             }
         }
 
@@ -88,8 +87,8 @@ class ControllerExtensionPaymentPaymaster extends Controller
     /**
      * Логироание не мое
      * @param  [type] $method метод (страница)
-     * @param  array $data данные (для дампа)
-     * @param  string $text текст (для описания)
+     * @param array $data данные (для дампа)
+     * @param string $text текст (для описания)
      * @return [type]         [description]
      */
     public function createLog($method, $data = array(), $text = '')
@@ -200,7 +199,7 @@ class ControllerExtensionPaymentPaymaster extends Controller
 
         $amount = number_format($order_info['total'], 2, '.', '');
         $currency = $order_info['currency_code'];
-        
+
         $merchant_id = $this->config->get('payment_paymaster_merchant_id');
 
         // Если у нас есть предварительные запрос
@@ -221,7 +220,7 @@ class ControllerExtensionPaymentPaymaster extends Controller
         }
 
         // Проверка на валюту и сумму платежа
-        if (($currency != $this->request->post['LMI_PAID_CURRENCY']) && ($amount != $this->request->post['LMI_PAYMENT_AMOUNT'])){
+        if (($currency != $this->request->post['LMI_PAID_CURRENCY']) && ($amount != $this->request->post['LMI_PAYMENT_AMOUNT'])) {
             echo 'FAIL';
             exit;
         }
@@ -279,7 +278,7 @@ class ControllerExtensionPaymentPaymaster extends Controller
         $LMI_SYS_PAYMENT_DATE = $request['LMI_SYS_PAYMENT_DATE'];
         $LMI_PAYMENT_AMOUNT = $request['LMI_PAYMENT_AMOUNT'];
         //Теперь получаем валюту заказа, то что была в заказе
-        $LMI_CURRENCY =   $request['LMI_CURRENCY'];
+        $LMI_CURRENCY = $request['LMI_CURRENCY'];
         $LMI_PAID_AMOUNT = $request['LMI_PAID_AMOUNT'];
         $LMI_PAID_CURRENCY = $request['LMI_PAID_CURRENCY'];
         $LMI_PAYMENT_SYSTEM = $request['LMI_PAYMENT_SYSTEM'];
@@ -338,7 +337,7 @@ class ControllerExtensionPaymentPaymaster extends Controller
     /**
      * Моя любимая функция Logger
      * @param  [type] $var  [description]
-     * @param  string $text [description]
+     * @param string $text [description]
      * @return [type]       [description]
      */
     public function logger($var, $text = '')
